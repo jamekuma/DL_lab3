@@ -15,7 +15,7 @@ def train(model, train_dataset, test_dataset, log_name, n_epochs, learning_rate,
     # 定义损失函数和优化器
     writer = SummaryWriter(f'./log/' + log_name + '/')
     lossfunc = torch.nn.CrossEntropyLoss().to(device)
-    optimizer = torch.optim.Adam(params=model.parameters(), lr=learning_rate)
+    optimizer = torch.optim.SGD(params=model.parameters(), lr=learning_rate, nesterov=True)
     # 开始训练
     for epoch in range(n_epochs):
         model.train()
@@ -25,8 +25,8 @@ def train(model, train_dataset, test_dataset, log_name, n_epochs, learning_rate,
             target = target.to(device)
             optimizer.zero_grad()  # 清空上一步的残余更新参数值
             output = model(data)  # 得到预测值
-            print(target.size())
-            print(output.size())
+            # print(target.size())
+            # print(output.size())
             loss = lossfunc(output, target)  # 计算两者的误差
             loss.backward()  # 误差反向传播, 计算参数更新值
             optimizer.step()  # 将参数更新值施加到 net 的 parameters 上
