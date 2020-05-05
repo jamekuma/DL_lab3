@@ -1,0 +1,8 @@
+/cifar-10-batches-py/
+*.ckpt
+*.zip
+*.rar
+*.md
+*.pdf
+*.doc
+*.docx
