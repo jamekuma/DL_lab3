@@ -15,7 +15,8 @@ def train(model, train_dataset, test_dataset, log_name, n_epochs, learning_rate,
     # 定义损失函数和优化器
     writer = SummaryWriter(f'./log/' + log_name + '/')
     lossfunc = torch.nn.CrossEntropyLoss().to(device)
-    optimizer = torch.optim.SGD(params=model.parameters(), lr=learning_rate, momentum=0.9, nesterov=True)
+    # optimizer = torch.optim.SGD(params=model.parameters(), lr=learning_rate, momentum=0.9, nesterov=True)
+    optimizer = torch.optim.Adam(params=model.parameters(), lr=learning_rate)
     # 开始训练
     for epoch in range(n_epochs):
         model.train()

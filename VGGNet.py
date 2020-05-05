@@ -2,7 +2,8 @@ import torch
 import torch.nn as nn
 
 # VGG的结构顺序, 描述了各层的输出通道数/最大池化层
-structure = [64, 64, 'M', 128, 128, 'M', 256, 256, 256, 256, 'M', 512, 512, 512, 512, 'M', 512, 512, 512, 512, 'M']
+# structure = [64, 64, 'M', 128, 128, 'M', 256, 256, 256, 256, 'M', 512, 512, 512, 512, 'M', 512, 512, 512, 512, 'M']
+structure = [32, 'M', 96, 'M', 148, 148, 'M', 256, 'M', 256, 'M']
 
 class VGGNet(nn.Module):
     def __init__(self, se_block, n_classes=10):
@@ -17,15 +18,15 @@ class VGGNet(nn.Module):
         self.avg_pool = nn.AdaptiveAvgPool2d((4, 4))  # 自适应平均池化层
         self.fc_layers = nn.Sequential(  # 三层全连接层
             # 全连接层1
-            nn.Linear(in_features=4 * 4 * self.conv_out_channels, out_features=4096),
-            nn.ReLU(inplace=True),
             nn.Dropout(p=0.5),
+            nn.Linear(in_features=4 * 4 * self.conv_out_channels, out_features=1024),
+            nn.ReLU(inplace=True),
             # 全连接层2
-            nn.Linear(in_features=4096, out_features=4096),
-            nn.ReLU(inplace=True),
             nn.Dropout(p=0.5),
+            nn.Linear(in_features=1024, out_features=1024),
+            nn.ReLU(inplace=True),
             # 全连接层3
-            nn.Linear(in_features=4096, out_features=n_classes),
+            nn.Linear(in_features=1024, out_features=n_classes),
         )
 
     def forward(self, x):
