@@ -48,41 +48,33 @@ class VGGNet(nn.Module):
             if v == 'M':  # max_pooling
                 layers += [nn.MaxPool2d(kernel_size=2, stride=2)]
             else:
+                conv2d = nn.Conv2d(in_channels, v, kernel_size=3, padding=1)
+                layers += [conv2d, nn.ReLU(inplace=True)]
                 if se_block:
-                    se = SeBlock(in_channels, v, kernel_size=3, stride=1, padding=1)
+                    se = SeBlock(v, kernel_size=3, stride=1, padding=1)
                     layers += [se]
-                else:
-                    conv2d = nn.Conv2d(in_channels, v, kernel_size=3, padding=1)
-                    layers += [conv2d, nn.ReLU(inplace=True)]
                 in_channels = v
         self.conv_layers = nn.Sequential(*layers)
         return in_channels
 
 
 class SeBlock(nn.Module):
-    def __init__(self, in_channels, out_channels, kernel_size, stride, padding, r=16):
+    def __init__(self, in_channels, kernel_size, stride, padding, r=16):
         super(SeBlock, self).__init__()
-        self.out_channels = out_channels
         self.in_channels = in_channels
-        # 正常的卷积层
-        self.conv = nn.Sequential(
-            nn.Conv2d(in_channels, out_channels, kernel_size=kernel_size, stride=stride, padding=padding),
-            nn.ReLU(inplace=True),
-            )
         # Squeeze
         self.sq = nn.AdaptiveAvgPool2d((1, 1))
         # Excitation
         self.ex = nn.Sequential(
-            nn.Linear(in_features=out_channels, out_features=int(out_channels / r)),
+            nn.Linear(in_features=in_channels, out_features=int(in_channels / r)),
             nn.ReLU(inplace=True),
-            nn.Linear(in_features=int(out_channels / r), out_features=out_channels),
+            nn.Linear(in_features=int(in_channels / r), out_features=in_channels),
             nn.Sigmoid(),
         )
 
     def forward(self, x):
-        u = self.conv(x)
-        sq = self.sq(u)
-        sq = sq.view(-1, self.out_channels)
+        sq = self.sq(x)
+        sq = sq.view(-1, self.in_channels)
         ex = self.ex(sq)
-        ex = ex.view(-1, self.out_channels, 1, 1)
-        return ex * u
+        ex = ex.view(-1, self.in_channels, 1, 1)
+        return ex * x
