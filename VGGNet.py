@@ -49,10 +49,11 @@ class VGGNet(nn.Module):
                 layers += [nn.MaxPool2d(kernel_size=2, stride=2)]
             else:
                 if se_block:
-                    conv2d = SeBlock(in_channels, v, kernel_size=3, stride=1, padding=1)
+                    se = SeBlock(in_channels, v, kernel_size=3, stride=1, padding=1)
+                    layers += [se]
                 else:
                     conv2d = nn.Conv2d(in_channels, v, kernel_size=3, padding=1)
-                layers += [conv2d, nn.ReLU(inplace=True)]
+                    layers += [conv2d, nn.ReLU(inplace=True)]
                 in_channels = v
         self.conv_layers = nn.Sequential(*layers)
         return in_channels
@@ -64,20 +65,23 @@ class SeBlock(nn.Module):
         self.out_channels = out_channels
         self.in_channels = in_channels
         # 正常的卷积层
-        self.conv = nn.Conv2d(in_channels, out_channels, kernel_size=kernel_size, stride=stride, padding=padding)
+        self.conv = nn.Sequential(
+            nn.Conv2d(in_channels, out_channels, kernel_size=kernel_size, stride=stride, padding=padding),
+            nn.ReLU(inplace=True),
+            )
         # Squeeze
         self.sq = nn.AdaptiveAvgPool2d((1, 1))
         # Excitation
         self.ex = nn.Sequential(
-            nn.Linear(in_features=out_channels, out_features=out_channels / r),
+            nn.Linear(in_features=out_channels, out_features=int(out_channels / r)),
             nn.ReLU(inplace=True),
-            nn.Linear(in_features=out_channels / r, out_features=out_channels),
-            nn.Sigmoid()
+            nn.Linear(in_features=int(out_channels / r), out_features=out_channels),
+            nn.Sigmoid(),
         )
 
     def forward(self, x):
         u = self.conv(x)
-        sq = self.se(u)
+        sq = self.sq(u)
         sq = sq.view(-1, self.out_channels)
         ex = self.ex(sq)
         ex = ex.view(-1, self.out_channels, 1, 1)
