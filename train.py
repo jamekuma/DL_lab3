@@ -86,87 +86,91 @@ if __name__ == '__main__':
     test_dataset = Cifar10Dataset('./cifar-10-batches-py/', train=False)
 
     
-    lrs = [1, 0.1, 0.01, 1e-3, 1e-4, 1e-5, 1e-6]
-    for lr in lrs:
-        model = VGGNet(se_block=False)
-        sgd = torch.optim.SGD(params=model.parameters(), lr=lr, momentum=0.9, nesterov=True)
-        print('VGG_SGD_NoSE_NoTransform_lr'+str(lr)+':')
-        try:
-            train(model, train_dataset_NoTransform, test_dataset, log_name='VGG_SGD_NoSE_NoTransform_lr'+str(lr), n_epochs=args.epoch, optimizer=sgd, batch_size=args.batch_size, gpu_available=args.gpu)
-        except KeyboardInterrupt:
-            pass
-        
-    for lr in lrs:
-        model = VGGNet(se_block=False)
-        adam = torch.optim.Adam(params=model.parameters(), lr=lr)
-        print('VGG_Adam_NoSE_NoTransform_lr'+str(lr)+':')
-        try:
-            train(model, train_dataset_NoTransform, test_dataset, log_name='VGG_Adam_NoSE_NoTransform_lr'+str(lr), n_epochs=args.epoch, optimizer=adam, batch_size=args.batch_size, gpu_available=args.gpu)
-        except KeyboardInterrupt:
-            pass
-    
-    for lr in lrs:
-        model = VGGNet(se_block=True)
-        sgd = torch.optim.SGD(params=model.parameters(), lr=lr, momentum=0.9, nesterov=True)
-        print('VGG_SGD_SE_NoTransform_lr'+str(lr)+':')
-        try:
-            train(model, train_dataset_NoTransform, test_dataset, log_name='VGG_SGD_SE_NoTransform_lr'+str(lr), n_epochs=args.epoch, optimizer=sgd, batch_size=args.batch_size, gpu_available=args.gpu)
-        except KeyboardInterrupt:
-            pass    
-            
-    for lr in lrs:
-        model = VGGNet(se_block=True)
-        adam = torch.optim.Adam(params=model.parameters(), lr=lr)
-        print('VGG_Adam_SE_NoTransform_lr'+str(lr)+':')
-        try:
-            train(model, train_dataset_NoTransform, test_dataset, log_name='VGG_Adam_SE_NoTransform_lr'+str(lr), n_epochs=args.epoch, optimizer=adam, batch_size=args.batch_size, gpu_available=args.gpu)
-        except KeyboardInterrupt:
-            pass
-    
-    ###################################################transform_train###############################################################
-    # cifar_norm_mean = (0.49139968, 0.48215827, 0.44653124)
-    # cifar_norm_std = (0.24703233, 0.24348505, 0.26158768)
-    
-    # transform_train = transforms.Compose([
-    #     # transforms.Resize(224),
-    #     transforms.RandomHorizontalFlip(),
-    #     transforms.ToTensor(),
-    #     transforms.Normalize(cifar_norm_mean, cifar_norm_std),
-    # ])
-    # train_dataset_Transform = Cifar10Dataset('./cifar-10-batches-py/', train=True, transform=transform_train)
+    lrs = [0.1, 0.01, 1e-3, 1e-4, 1e-5, 1e-6]
     # for lr in lrs:
     #     model = VGGNet(se_block=False)
     #     sgd = torch.optim.SGD(params=model.parameters(), lr=lr, momentum=0.9, nesterov=True)
-    #     print('VGG_SGD_NoSE_Transform_lr'+str(lr)+':')
+    #     print('VGG_SGD_NoSE_NoTransform_lr'+str(lr)+':')
     #     try:
-    #         train(model, train_dataset_Transform, test_dataset, log_name='VGG_SGD_NoSE_Transform_lr'+str(lr), n_epochs=args.epoch, optimizer=sgd, batch_size=args.batch_size, gpu_available=args.gpu)
+    #         train(model, train_dataset_NoTransform, test_dataset, log_name='VGG_SGD_NoSE_NoTransform_lr'+str(lr), n_epochs=args.epoch, optimizer=sgd, batch_size=args.batch_size, gpu_available=args.gpu)
     #     except KeyboardInterrupt:
     #         pass
         
     # for lr in lrs:
     #     model = VGGNet(se_block=False)
     #     adam = torch.optim.Adam(params=model.parameters(), lr=lr)
-    #     print('VGG_Adam_NoSE_Transform_lr'+str(lr)+':')
+    #     print('VGG_Adam_NoSE_NoTransform_lr'+str(lr)+':')
     #     try:
-    #         train(model, train_dataset_Transform, test_dataset, log_name='VGG_Adam_NoSE_Transform_lr'+str(lr), n_epochs=args.epoch, optimizer=adam, batch_size=args.batch_size, gpu_available=args.gpu)
+    #         train(model, train_dataset_NoTransform, test_dataset, log_name='VGG_Adam_NoSE_NoTransform_lr'+str(lr), n_epochs=args.epoch, optimizer=adam, batch_size=args.batch_size, gpu_available=args.gpu)
     #     except KeyboardInterrupt:
     #         pass
     
     # for lr in lrs:
     #     model = VGGNet(se_block=True)
     #     sgd = torch.optim.SGD(params=model.parameters(), lr=lr, momentum=0.9, nesterov=True)
-    #     print('VGG_SGD_SE_Transform_lr'+str(lr)+':')
+    #     print('VGG_SGD_SE_NoTransform_lr'+str(lr)+':')
     #     try:
-    #         train(model, train_dataset_Transform, test_dataset, log_name='VGG_SGD_SE_Transform_lr'+str(lr), n_epochs=args.epoch, optimizer=sgd, batch_size=args.batch_size, gpu_available=args.gpu)
+    #         train(model, train_dataset_NoTransform, test_dataset, log_name='VGG_SGD_SE_NoTransform_lr'+str(lr), n_epochs=args.epoch, optimizer=sgd, batch_size=args.batch_size, gpu_available=args.gpu)
     #     except KeyboardInterrupt:
     #         pass    
             
     # for lr in lrs:
     #     model = VGGNet(se_block=True)
     #     adam = torch.optim.Adam(params=model.parameters(), lr=lr)
-    #     print('VGG_Adam_SE_Transform_lr'+str(lr)+':')
+    #     print('VGG_Adam_SE_NoTransform_lr'+str(lr)+':')
     #     try:
-    #         train(model, train_dataset_Transform, test_dataset, log_name='VGG_Adam_SE_Transform_lr'+str(lr), n_epochs=args.epoch, optimizer=adam, batch_size=args.batch_size, gpu_available=args.gpu)
+    #         train(model, train_dataset_NoTransform, test_dataset, log_name='VGG_Adam_SE_NoTransform_lr'+str(lr), n_epochs=args.epoch, optimizer=adam, batch_size=args.batch_size, gpu_available=args.gpu)
     #     except KeyboardInterrupt:
     #         pass
+    
+    ###################################################transform_train###############################################################
+    
+    transform_train = transforms.Compose([
+        transforms.RandomCrop(32,padding=4),
+        transforms.RandomHorizontalFlip(),
+        transforms.ToTensor(),
+        transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),
+    ])
+
+    transform_test = transforms.Compose([
+        transforms.ToTensor(),
+        transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),
+    ])
+    train_dataset_Transform = Cifar10Dataset('./cifar-10-batches-py/', train=True, transform=transform_train)
+    test_dataset_Transform = Cifar10Dataset('./cifar-10-batches-py/', train=False, transform=transform_test)
+    for lr in lrs:
+        model = VGGNet(se_block=False)
+        sgd = torch.optim.SGD(params=model.parameters(), lr=lr, momentum=0.9, nesterov=True)
+        print('VGG_SGD_NoSE_Transform_lr'+str(lr)+':')
+        try:
+            train(model, train_dataset_Transform, test_dataset_Transform, log_name='VGG_SGD_NoSE_Transform_lr'+str(lr), n_epochs=args.epoch, optimizer=sgd, batch_size=args.batch_size, gpu_available=args.gpu)
+        except KeyboardInterrupt:
+            pass
+        
+    for lr in lrs:
+        model = VGGNet(se_block=False)
+        adam = torch.optim.Adam(params=model.parameters(), lr=lr)
+        print('VGG_Adam_NoSE_Transform_lr'+str(lr)+':')
+        try:
+            train(model, train_dataset_Transform, test_dataset_Transform, log_name='VGG_Adam_NoSE_Transform_lr'+str(lr), n_epochs=args.epoch, optimizer=adam, batch_size=args.batch_size, gpu_available=args.gpu)
+        except KeyboardInterrupt:
+            pass
+    
+    for lr in lrs:
+        model = VGGNet(se_block=True)
+        sgd = torch.optim.SGD(params=model.parameters(), lr=lr, momentum=0.9, nesterov=True)
+        print('VGG_SGD_SE_Transform_lr'+str(lr)+':')
+        try:
+            train(model, train_dataset_Transform, test_dataset_Transform, log_name='VGG_SGD_SE_Transform_lr'+str(lr), n_epochs=args.epoch, optimizer=sgd, batch_size=args.batch_size, gpu_available=args.gpu)
+        except KeyboardInterrupt:
+            pass    
+            
+    for lr in lrs:
+        model = VGGNet(se_block=True)
+        adam = torch.optim.Adam(params=model.parameters(), lr=lr)
+        print('VGG_Adam_SE_Transform_lr'+str(lr)+':')
+        try:
+            train(model, train_dataset_Transform, test_dataset_Transform, log_name='VGG_Adam_SE_Transform_lr'+str(lr), n_epochs=args.epoch, optimizer=adam, batch_size=args.batch_size, gpu_available=args.gpu)
+        except KeyboardInterrupt:
+            pass
     
