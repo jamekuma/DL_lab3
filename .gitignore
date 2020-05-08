@@ -2,7 +2,6 @@
 *.ckpt
 *.zip
 *.rar
-*.md
 *.pdf
 *.doc
 *.docx
