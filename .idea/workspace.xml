@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="2f128f34-b5a6-4d81-86fb-a1232d0e90e7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -79,10 +78,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://E:/ProgramData/Anaconda3/envs/PRDL_gpu/Lib/site-packages/torchvision/models/vgg.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-425">
+            <state relative-caret-position="1207">
               <caret line="71" column="52" selection-start-line="71" selection-start-column="35" selection-end-line="71" selection-end-column="52" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
@@ -91,11 +90,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/train.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="40" column="49" selection-start-line="40" selection-start-column="49" selection-end-line="40" selection-end-column="49" />
+            <state relative-caret-position="765">
+              <caret line="45" column="65" lean-forward="true" selection-start-line="45" selection-start-column="65" selection-end-line="45" selection-end-column="65" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -153,7 +152,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-11" />
     <option name="y" value="-11" />
     <option name="width" value="2582" />
@@ -260,15 +259,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1721" height="935" extended-state="6" />
+    <frame x="-7" y="-7" width="1721" height="935" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.059559263" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.059559263" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Python Console" />
-      <window_info anchor="bottom" id="Terminal" visible="true" weight="0.15620999" />
+      <window_info active="true" anchor="bottom" id="Terminal" visible="true" weight="0.33418694" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -351,22 +350,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://E:/ProgramData/Anaconda3/envs/PRDL_gpu/Lib/site-packages/torchvision/models/vgg.py">
+    <entry file="file://$PROJECT_DIR$/train.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-425">
-          <caret line="71" column="52" selection-start-line="71" selection-start-column="35" selection-end-line="71" selection-end-column="52" />
+        <state relative-caret-position="765">
+          <caret line="45" column="65" lean-forward="true" selection-start-line="45" selection-start-column="65" selection-end-line="45" selection-end-column="65" />
           <folding>
-            <element signature="e#0#12#0" expanded="true" />
+            <element signature="e#0#15#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/train.py">
+    <entry file="file://E:/ProgramData/Anaconda3/envs/PRDL_gpu/Lib/site-packages/torchvision/models/vgg.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="40" column="49" selection-start-line="40" selection-start-column="49" selection-end-line="40" selection-end-column="49" />
+        <state relative-caret-position="1207">
+          <caret line="71" column="52" selection-start-line="71" selection-start-column="35" selection-end-line="71" selection-end-column="52" />
           <folding>
-            <element signature="e#0#15#0" expanded="true" />
+            <element signature="e#0#12#0" expanded="true" />
           </folding>
         </state>
       </provider>
