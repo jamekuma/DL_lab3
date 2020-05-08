@@ -85,7 +85,8 @@ if __name__ == '__main__':
 
     # train_dataset_NoTransform = Cifar10Dataset('./cifar-10-batches-py/', train=True)
     # test_dataset = Cifar10Dataset('./cifar-10-batches-py/', train=False)
-
+    train_dataset_NoTransform = torch.utils.data.DataLoader(Cifar10Dataset('./cifar-10-batches-py/', train=True), batch_size=args.batch_size, shuffle=True)
+    test_dataset = torch.utils.data.DataLoader(Cifar10Dataset('./cifar-10-batches-py/', train=False), batch_size=args.batch_size)
     
     lrs = [0.1, 0.01, 1e-3, 1e-4, 1e-5, 1e-6]
     # for lr in lrs:
@@ -137,7 +138,7 @@ if __name__ == '__main__':
         transforms.ToTensor(),
         transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),
     ])
-    train_dataset_Transform = torch.utils.data.DataLoader(Cifar10Dataset('./cifar-10-batches-py/', train=True, transform=transform_train), batch_size=args.batch_size)
+    train_dataset_Transform = torch.utils.data.DataLoader(Cifar10Dataset('./cifar-10-batches-py/', train=True, transform=transform_train), batch_size=args.batch_size, shuffle=True)
     test_dataset_Transform = torch.utils.data.DataLoader(Cifar10Dataset('./cifar-10-batches-py/', train=False, transform=transform_test), batch_size=args.batch_size)
     # for lr in lrs:
     #     model = VGGNet(se_block=False)
